@@ -1,0 +1,164 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>沈药毕业自测系统 - 沈阳药科大学本科毕业标准自查平台</title>
+<link rel="stylesheet" href="libs/index.css">
+<script src="libs/vue.global.prod.js"></script>
+<script src="libs/index.full.min.js"></script>
+<script src="libs/index.iife.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Microsoft YaHei','PingFang SC',sans-serif;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#c0c4cc;border-radius:3px;}
+.login-page{height:100vh;display:flex;align-items:flex-end;justify-content:flex-start;background:url('login-bg.png') center/cover no-repeat;position:relative;overflow:hidden;padding-left:9vw;padding-bottom:4.5vh;}
+/* removed */
+/* removed */
+.login-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border-radius:16px;padding:24px 28px 20px;width:300px;box-shadow:0 8px 32px rgba(0,0,0,0.12);position:relative;z-index:1;}
+
+.login-logo{width:56px;height:56px;margin:0 auto 12px;background:linear-gradient(135deg,#1a5276,#2e7d32);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;box-shadow:0 6px 20px rgba(26,82,118,0.3);}
+.login-title{text-align:center;font-size:20px;font-weight:700;color:#1a5276;margin-bottom:2px;}
+.login-sub{text-align:center;font-size:12px;color:#5d6d7e;margin-bottom:24px;}
+.app-layout{display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:260px;min-width:260px;background:linear-gradient(180deg,#1e1e3f 0%,#2d2d5e 100%);display:flex;flex-direction:column;color:#fff;overflow-y:auto;}
+.sidebar-logo{padding:24px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);}
+.sidebar-logo .s-logo{width:52px;height:52px;margin:0 auto 10px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(102,126,234,0.4);}
+.sidebar-logo .s-name{font-size:18px;font-weight:700;}
+.sidebar-logo .s-desc{font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;}
+.sidebar-menu{flex:1;padding:12px 10px;}
+.menu-group{margin-bottom:16px;}
+.menu-group-label{font-size:11px;color:rgba(255,255,255,0.4);padding:4px 14px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;}
+.menu-item{display:flex;align-items:center;padding:10px 14px;border-radius:10px;cursor:pointer;transition:all 0.2s;font-size:14px;color:rgba(255,255,255,0.75);margin-bottom:2px;}
+.menu-item:hover{background:rgba(255,255,255,0.1);color:#fff;}
+.menu-item.active{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;box-shadow:0 4px 12px rgba(102,126,234,0.3);}
+.menu-item .mi{width:32px;text-align:center;font-size:18px;margin-right:10px;}
+.app-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.app-header{height:56px;background:#fff;border-bottom:1px solid #eee6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;}
+.app-header .breadcrumb{font-size:14px;color:#606266;}
+.app-header .breadcrumb span{color:#909399;}
+.app-header .header-right{display:flex;align-items:center;gap:12px;}
+.app-header .user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:600;}
+.app-content{flex:1;overflow-y:auto;padding:24px;background:#f5f7fa;}
+.stat-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);transition:transform 0.2s;}
+.stat-card:hover{transform:translateY(-2px);}
+.stat-card .sc-title{font-size:13px;color:#909399;margin-bottom:8px;}
+.stat-card .sc-value{font-size:28px;font-weight:700;}
+.stat-card .sc-sub{font-size:12px;color:#b0b3b8;margin-top:4px;}
+.progress-bar{height:10px;background:#eee;border-radius:5px;overflow:hidden;margin-top:8px;}
+.progress-bar .fill{height:100%;border-radius:5px;transition:width 0.6s ease;}
+.section-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:16px;}
+.section-title{font-size:16px;font-weight:600;color:#1a1a2e;padding-bottom:12px;border-bottom:2px solid #f0f0f0;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-green{background:#e8f5e9;color:#2e7d32;}
+.badge-red{background:#ffebee;color:#c62828;}
+.badge-orange{background:#fff3e0;color:#e65100;}
+.badge-blue{background:#e3f2fd;color:#1565c0;}
+.el-table{font-size:13px;}
+.el-table th{background:#f8f9ff !important;}
+.warning-card{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:1px solid #ffcc80;border-radius:12px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:flex-start;gap:12px;}
+.warning-card .wc-icon{font-size:24px;flex-shrink:0;}
+.success-card{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #a5d6a7;border-radius:12px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:flex-start;gap:12px;}
+.success-card .sc-icon{font-size:24px;flex-shrink:0;}
+.cert-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:2px solid #f0f0f0;transition:all 0.3s;}
+.cert-ok{border-color:#4caf50;background:linear-gradient(135deg,rgba(232,245,233,0.6),#fff);}
+.cert-pending{border-color:#ffcc80;background:linear-gradient(135deg,rgba(255,243,224,0.4),#fff);}
+.congrats-banner{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:14px;padding:20px 24px;color:#fff;text-align:center;margin-bottom:16px;box-shadow:0 4px 16px rgba(102,126,234,0.3);}
+.warning-banner{background:linear-gradient(135deg,#ffebee,#ffcdd2);border:1px solid #ef9a9a;border-radius:14px;padding:16px 24px;color:#c62828;text-align:center;margin-bottom:16px;}
+.info-banner{background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:1px solid #90caf9;border-radius:14px;padding:16px 24px;color:#1565c0;text-align:center;margin-bottom:16px;}
+.notice-badge{background:#f56c6c;color:#fff;font-size:11px;border-radius:10px;padding:1px 7px;font-weight:600;}.menu-group{margin-bottom:4px;}.menu-group-label{font-size:11px;color:#a0a3ab;padding:8px 20px 4px;letter-spacing:1px;}
+</style>
+</head>
+<body>
+=======
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>沈药毕业自测系统 - 沈阳药科大学本科毕业标准自查平台</title>
+<link rel="stylesheet" href="libs/index.css">
+<script src="libs/vue.global.prod.js"></script>
+<script src="libs/index.full.min.js"></script>
+<script src="libs/index.iife.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Microsoft YaHei','PingFang SC',sans-serif;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#c0c4cc;border-radius:3px;}
+.login-page{height:100vh;display:flex;align-items:flex-end;justify-content:flex-start;background:url('login-bg.png') center/cover no-repeat;position:relative;overflow:hidden;padding-left:9vw;padding-bottom:4.5vh;}
+/* removed */
+/* removed */
+.login-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border-radius:16px;padding:24px 28px 20px;width:300px;box-shadow:0 8px 32px rgba(0,0,0,0.12);position:relative;z-index:1;}
+
+.login-logo{width:56px;height:56px;margin:0 auto 12px;background:linear-gradient(135deg,#1a5276,#2e7d32);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;box-shadow:0 6px 20px rgba(26,82,118,0.3);}
+.login-title{text-align:center;font-size:20px;font-weight:700;color:#1a5276;margin-bottom:2px;}
+.login-sub{text-align:center;font-size:12px;color:#5d6d7e;margin-bottom:24px;}
+.app-layout{display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:260px;min-width:260px;background:linear-gradient(180deg,#1e1e3f 0%,#2d2d5e 100%);display:flex;flex-direction:column;color:#fff;overflow-y:auto;}
+.sidebar-logo{padding:24px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);}
+.sidebar-logo .s-logo{width:52px;height:52px;margin:0 auto 10px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(102,126,234,0.4);}
+.sidebar-logo .s-name{font-size:18px;font-weight:700;}
+.sidebar-logo .s-desc{font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;}
+.sidebar-menu{flex:1;padding:12px 10px;}
+.menu-group{margin-bottom:16px;}
+.menu-group-label{font-size:11px;color:rgba(255,255,255,0.4);padding:4px 14px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;}
+.menu-item{display:flex;align-items:center;padding:10px 14px;border-radius:10px;cursor:pointer;transition:all 0.2s;font-size:14px;color:rgba(255,255,255,0.75);margin-bottom:2px;}
+.menu-item:hover{background:rgba(255,255,255,0.1);color:#fff;}
+.menu-item.active{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;box-shadow:0 4px 12px rgba(102,126,234,0.3);}
+.menu-item .mi{width:32px;text-align:center;font-size:18px;margin-right:10px;}
+.app-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.app-header{height:56px;background:#fff;border-bottom:1px solid #eee6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;}
+.app-header .breadcrumb{font-size:14px;color:#606266;}
+.app-header .breadcrumb span{color:#909399;}
+.app-header .header-right{display:flex;align-items:center;gap:12px;}
+.app-header .user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:600;}
+.app-content{flex:1;overflow-y:auto;padding:24px;background:#f5f7fa;}
+.stat-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);transition:transform 0.2s;}
+.stat-card:hover{transform:translateY(-2px);}
+.stat-card .sc-title{font-size:13px;color:#909399;margin-bottom:8px;}
+.stat-card .sc-value{font-size:28px;font-weight:700;}
+.stat-card .sc-sub{font-size:12px;color:#b0b3b8;margin-top:4px;}
+.progress-bar{height:10px;background:#eee;border-radius:5px;overflow:hidden;margin-top:8px;}
+.progress-bar .fill{height:100%;border-radius:5px;transition:width 0.6s ease;}
+.section-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:16px;}
+.section-title{font-size:16px;font-weight:600;color:#1a1a2e;padding-bottom:12px;border-bottom:2px solid #f0f0f0;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-green{background:#e8f5e9;color:#2e7d32;}
+.badge-red{background:#ffebee;color:#c62828;}
+.badge-orange{background:#fff3e0;color:#e65100;}
+.badge-blue{background:#e3f2fd;color:#1565c0;}
+.el-table{font-size:13px;}
+.el-table th{background:#f8f9ff !important;}
+.warning-card{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:1px solid #ffcc80;border-radius:12px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:flex-start;gap:12px;}
+.warning-card .wc-icon{font-size:24px;flex-shrink:0;}
+.success-card{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #a5d6a7;border-radius:12px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:flex-start;gap:12px;}
+.success-card .sc-icon{font-size:24px;flex-shrink:0;}
+.cert-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:2px solid #f0f0f0;transition:all 0.3s;}
+.cert-ok{border-color:#4caf50;background:linear-gradient(135deg,rgba(232,245,233,0.6),#fff);}
+.cert-pending{border-color:#ffcc80;background:linear-gradient(135deg,rgba(255,243,224,0.4),#fff);}
+.congrats-banner{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:14px;padding:20px 24px;color:#fff;text-align:center;margin-bottom:16px;box-shadow:0 4px 16px rgba(102,126,234,0.3);}
+.warning-banner{background:linear-gradient(135deg,#ffebee,#ffcdd2);border:1px solid #ef9a9a;border-radius:14px;padding:16px 24px;color:#c62828;text-align:center;margin-bottom:16px;}
+.info-banner{background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:1px solid #90caf9;border-radius:14px;padding:16px 24px;color:#1565c0;text-align:center;margin-bottom:16px;}
+.notice-badge{background:#f56c6c;color:#fff;font-size:11px;border-radius:10px;padding:1px 7px;font-weight:600;}.menu-group{margin-bottom:4px;}.menu-group-label{font-size:11px;color:#a0a3ab;padding:8px 20px 4px;letter-spacing:1px;}
+</style>
+</head>
+<body>
+>>>>>>> origin/master
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="src/sync_grades.js"></script>
+<script src="src/sync_api.js"></script>
+<<<<<<< HEAD
+<script src="src/db.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
+=======
+<script src="src/db.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
+>>>>>>> origin/master
